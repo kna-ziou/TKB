@@ -1,0 +1,81 @@
+/* Print & A4 Export Stylesheet */
+
+@media print {
+  /* Reset document for clean printing */
+  html,
+  body {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+    font-size: 12pt;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Force exact background color printing for themes & subject badges */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide everything not meant for print */
+  #app-header,
+  #setup-panel,
+  #print-toolbar,
+  #timetable-container,
+  #timetable-empty-state,
+  #timetable-workspace,
+  #timetable-preview-area,
+  #a4-preview-modal,
+  #subject-manager-modal,
+  #subject-picker-popover,
+  .no-print,
+  button,
+  .modal-overlay,
+  .modal-backdrop,
+  [data-no-print="true"] {
+    display: none !important;
+  }
+
+  /* Isolate and format the printable timetable sheet */
+  #printable-timetable-sheet {
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    transform: none !important;
+  }
+
+  /* Prevent awkward page breaks */
+  table,
+  tr,
+  td,
+  th {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Enforce single-page fit without page spills */
+  body.print-landscape #printable-timetable-sheet {
+    max-height: 188mm !important;
+  }
+
+  body.print-portrait #printable-timetable-sheet {
+    max-height: 275mm !important;
+  }
+}

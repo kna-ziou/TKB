@@ -1,0 +1,6 @@
+{
+  "name": "TKB Online Designer",
+  "description": "Tạo thời khóa biểu trực quan, nhanh và đẹp cho học sinh và giáo viên",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

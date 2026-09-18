@@ -63,11 +63,11 @@ if defined HAS_LOCAL_CHANGES (
 
 :: 4. Prompt operator to verify server status
 echo Luu y: Neu may chu TKB dang chay trong cua so khac,
-echo ban nen tat may chu (Ctrl+C) truoc khi tiep tuc cap nhat.
+echo ban nen tat may chu [Ctrl+C] truoc khi tiep tuc cap nhat.
 echo.
 
 :: 5. Pull updates safely via fast-forward only
-echo [1/3] Dang keo ma nguon moi nhat tu GitHub (git pull --ff-only)...
+echo [1/3] Dang keo ma nguon moi nhat tu GitHub [git pull --ff-only]...
 call git pull --ff-only
 if %ERRORLEVEL% neq 0 (
     echo.
@@ -82,11 +82,11 @@ echo [OK] Da keo ma nguon moi nhat.
 echo.
 
 :: 6. Update dependencies
-echo [2/3] Dang cap nhat thu vien phu thuoc (npm install)...
+echo [2/3] Dang cap nhat thu vien phu thuoc [npm install]...
 call npm install
 if %ERRORLEVEL% neq 0 (
     echo.
-    echo [LOI] Cap nhat thu vien (npm install) that bai!
+    echo [LOI] Cap nhat thu vien [npm install] that bai!
     echo.
     pause
     exit /b 1
@@ -95,11 +95,11 @@ echo [OK] Thu vien da duoc cap nhat.
 echo.
 
 :: 7. Rebuild production bundle
-echo [3/3] Dang bien dich lai ban production (npm run build)...
+echo [3/3] Dang bien dich lai ban production [npm run build]...
 call npm run build
 if %ERRORLEVEL% neq 0 (
     echo.
-    echo [LOI] Bien dich lai ban production (npm run build) that bai!
+    echo [LOI] Bien dich lai ban production [npm run build] that bai!
     echo.
     pause
     exit /b 1
@@ -124,10 +124,10 @@ echo  UPDATE SUCCESS - CAP NHAT THANH CONG!
 echo ===================================================
 echo Ban build moi nhat da san sang trong dist/.
 echo.
-echo Neu may chu cu dang chay, hay dung (Ctrl+C) va khoi dong lai bang:
+echo Neu may chu cu dang chay, hay dung [Ctrl+C] va khoi dong lai bang:
 echo    deployment\windows\start-tkb.bat
 echo.
-echo (May chu khong tu dong khoi dong de ban chu dong kiem soat)
+echo [Thong bao: May chu khong tu dong khoi dong de ban chu dong kiem soat]
 echo ===================================================
 echo.
 pause

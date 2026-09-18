@@ -168,6 +168,41 @@ function runTestPhase09D() {
       docContent.toLowerCase().includes('standalone'));
   assert(statesNoService, 'TEST U: documentation states no Windows Service/autostart in 09D');
 
+  // --- TEST V: Windows CMD parenthesis audit (HOTFIX 09D-M02) ---
+  // Verify check-tkb.bat uses label jumps to avoid CMD ( ... ) parsing traps
+  const checkUsesLabelJumps =
+    checkBatContent.includes('goto :server_online') &&
+    checkBatContent.includes('goto :server_offline');
+  assert(checkUsesLabelJumps, 'TEST V.1: check-tkb.bat uses label jumps instead of fragile if/else parenthesized blocks');
+
+  // Verify none of the BAT files contain unescaped parentheses in echo statements that could trigger ". was unexpected at this time"
+  function auditBatForUnsafeParentheses(filename: string, content: string): boolean {
+    const lines = content.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (line.startsWith('::') || line.startsWith('REM')) continue;
+      
+      if (line.startsWith('echo ') || line.startsWith('echo.')) {
+        const echoText = line.substring(4).trim();
+        // Disallow closing parenthesis in echo unless escaped as ^)
+        if (echoText.includes(')') && !echoText.includes('^)')) {
+          console.error(`Unsafe echo with unescaped parenthesis in ${filename} at line ${i + 1}: "${line}"`);
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  const checkSafe = auditBatForUnsafeParentheses('check-tkb.bat', checkBatContent);
+  const startSafe = auditBatForUnsafeParentheses('start-tkb.bat', startBatContent);
+  const setupSafe = auditBatForUnsafeParentheses('setup-tkb.bat', setupBatContent);
+  const updateSafe = auditBatForUnsafeParentheses('update-tkb.bat', updateBatContent);
+  assert(
+    checkSafe && startSafe && setupSafe && updateSafe,
+    'TEST V.2: All BAT scripts audited safe from CMD unescaped parenthesis parsing bugs'
+  );
+
   console.log('================================================================');
   if (allPassed) {
     console.log('FINAL RESULT: ALL PHASE 09D TESTS PASSED');

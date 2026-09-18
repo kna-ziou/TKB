@@ -23,7 +23,7 @@ echo.
 where node >nul 2>&1
 if %ERRORLEVEL% neq 0 (
     echo [LOI] Khong tim thay Node.js trong he thong!
-    echo Vui long cai dat Node.js LTS (>=20) tu: https://nodejs.org/
+    echo Vui long cai dat Node.js LTS [>=20] tu: https://nodejs.org/
     echo Sau khi cai dat, vui long mo lai terminal hoac chay lai file nay.
     echo.
     pause
@@ -52,7 +52,7 @@ if not exist "%REPO_ROOT%\package.json" (
 
 :: 4. Verify production build artifact (dist\server.cjs)
 if not exist "%REPO_ROOT%\dist\server.cjs" (
-    echo [LOI] Chua co ban build production (thieu file dist\server.cjs)!
+    echo [LOI] Chua co ban build production - thieu file dist\server.cjs!
     echo.
     echo Vui long chay script cai dat / build truoc khi khoi dong:
     echo    deployment\windows\setup-tkb.bat
@@ -74,7 +74,7 @@ echo Dang khoi dong may chu production...
 echo Cong hoat dong: %PORT%
 echo.
 echo ===================================================
-echo  MAY CHU DANG CHAY (Nhan Ctrl+C de dung may chu)
+echo  MAY CHU DANG CHAY - Nhan Ctrl+C de dung may chu
 echo ===================================================
 echo.
 echo Truy cap ung dung tai trinh duyet:

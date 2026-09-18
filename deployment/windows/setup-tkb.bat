@@ -23,7 +23,7 @@ echo.
 where node >nul 2>&1
 if %ERRORLEVEL% neq 0 (
     echo [LOI] Khong tim thay Node.js trong he thong!
-    echo Vui long cai dat Node.js LTS (>=20) tu: https://nodejs.org/
+    echo Vui long cai dat Node.js LTS [>=20] tu: https://nodejs.org/
     echo Sau khi cai dat, vui long mo lai terminal hoac chay lai file nay.
     echo.
     pause
@@ -58,13 +58,13 @@ if not exist "%REPO_ROOT%\package.json" (
 )
 
 :: 4. Run npm install
-echo [1/2] Dang cai dat cac thu vien phu thuoc (npm install)...
+echo [1/2] Dang cai dat cac thu vien phu thuoc [npm install]...
 echo Tien trinh co the mat 1-3 phut tuy thuoc vao toc do mang...
 echo.
 call npm install
 if %ERRORLEVEL% neq 0 (
     echo.
-    echo [LOI] Qua trinh cai dat thu vien (npm install) that bai!
+    echo [LOI] Qua trinh cai dat thu vien [npm install] that bai!
     echo Vui long kiem tra lai ket noi Internet hoac log loi o tren.
     echo.
     pause
@@ -74,12 +74,12 @@ echo [OK] Cai dat thu vien thanh cong.
 echo.
 
 :: 5. Run npm run build
-echo [2/2] Dang bien dich ban production (npm run build)...
+echo [2/2] Dang bien dich ban production [npm run build]...
 echo.
 call npm run build
 if %ERRORLEVEL% neq 0 (
     echo.
-    echo [LOI] Qua trinh bien dich production (npm run build) that bai!
+    echo [LOI] Qua trinh bien dich production [npm run build] that bai!
     echo Vui long kiem tra log loi o tren.
     echo.
     pause
@@ -111,7 +111,7 @@ echo.
 echo De khoi dong may chu production, vui long chay:
 echo    deployment\windows\start-tkb.bat
 echo.
-echo (Ung dung khong tu dong khoi dong de ban chu dong kiem soat)
+echo [Thong bao: Ung dung khong tu dong khoi dong de ban chu dong kiem soat]
 echo ===================================================
 echo.
 pause

@@ -203,6 +203,45 @@ function runTestPhase09D() {
     'TEST V.2: All BAT scripts audited safe from CMD unescaped parenthesis parsing bugs'
   );
 
+  // --- TEST W: Windows CMD metacharacters audit (HOTFIX 09D-M07) ---
+  // Verify no echo or title statements contain unescaped &, |, <, > which cause cmd.exe command-splitting
+  function auditBatForUnsafeMetacharacters(filename: string, content: string): boolean {
+    const lines = content.split('\n');
+    const unsafeChars = ['&', '|', '<', '>'];
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim();
+      if (line.startsWith('::') || line.startsWith('REM')) continue;
+
+      if (line.startsWith('echo ') || line.startsWith('echo.') || line.startsWith('title ')) {
+        const text = line.startsWith('title ') ? line.substring(6).trim() : line.substring(4).trim();
+        for (const char of unsafeChars) {
+          // Check if char appears without preceding caret escape ^
+          let idx = text.indexOf(char);
+          while (idx !== -1) {
+            if (idx === 0 || text[idx - 1] !== '^') {
+              console.error(
+                `Unsafe CMD metacharacter '${char}' in ${filename} at line ${i + 1}: "${line}"`
+              );
+              return false;
+            }
+            idx = text.indexOf(char, idx + 1);
+          }
+        }
+      }
+    }
+    return true;
+  }
+
+  const checkMetaSafe = auditBatForUnsafeMetacharacters('check-tkb.bat', checkBatContent);
+  const startMetaSafe = auditBatForUnsafeMetacharacters('start-tkb.bat', startBatContent);
+  const setupMetaSafe = auditBatForUnsafeMetacharacters('setup-tkb.bat', setupBatContent);
+  const updateMetaSafe = auditBatForUnsafeMetacharacters('update-tkb.bat', updateBatContent);
+  assert(
+    checkMetaSafe && startMetaSafe && setupMetaSafe && updateMetaSafe,
+    'TEST W: All BAT scripts audited safe from unescaped CMD metacharacters (&, |, <, >) in echo/title'
+  );
+
   console.log('================================================================');
   if (allPassed) {
     console.log('FINAL RESULT: ALL PHASE 09D TESTS PASSED');

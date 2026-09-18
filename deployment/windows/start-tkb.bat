@@ -23,7 +23,7 @@ echo.
 where node >nul 2>&1
 if %ERRORLEVEL% neq 0 (
     echo [LOI] Khong tim thay Node.js trong he thong!
-    echo Vui long cai dat Node.js LTS [>=20] tu: https://nodejs.org/
+    echo Vui long cai dat Node.js LTS [tu phien ban 20 tro len] tu: https://nodejs.org/
     echo Sau khi cai dat, vui long mo lai terminal hoac chay lai file nay.
     echo.
     pause

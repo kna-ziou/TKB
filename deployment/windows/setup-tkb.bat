@@ -6,7 +6,7 @@ setlocal enabledelayedexpansion
 :: Purpose: First-time installation and production build after cloning
 :: ============================================================================
 
-title TKB Online Designer - Setup & Build
+title TKB Online Designer - Setup and Build
 
 :: Resolve repository root relative to this script directory
 set "SCRIPT_DIR=%~dp0"
@@ -14,7 +14,7 @@ cd /d "%SCRIPT_DIR%..\.."
 set "REPO_ROOT=%CD%"
 
 echo ===================================================
-echo  TKB Online Designer - Setup & Production Build
+echo  TKB Online Designer - Setup and Production Build
 echo ===================================================
 echo Thu muc ung dung: "%REPO_ROOT%"
 echo.
@@ -23,7 +23,7 @@ echo.
 where node >nul 2>&1
 if %ERRORLEVEL% neq 0 (
     echo [LOI] Khong tim thay Node.js trong he thong!
-    echo Vui long cai dat Node.js LTS [>=20] tu: https://nodejs.org/
+    echo Vui long cai dat Node.js LTS [tu phien ban 20 tro len] tu: https://nodejs.org/
     echo Sau khi cai dat, vui long mo lai terminal hoac chay lai file nay.
     echo.
     pause
